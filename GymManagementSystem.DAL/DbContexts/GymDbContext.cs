@@ -8,7 +8,7 @@ using GymManagementSystem.DAL.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace GymManagementSystem.DAL.DbContexts {
-    internal class GymDbContext : DbContext {
+    public class GymDbContext : DbContext {
         public DbSet<Plan> Plans { get; set; }
 
         override protected void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
