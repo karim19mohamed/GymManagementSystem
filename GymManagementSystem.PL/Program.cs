@@ -1,3 +1,7 @@
+using GymManagementSystem.DAL.DbContexts;
+using GymManagementSystem.DAL.Repositories.Classes;
+using GymManagementSystem.DAL.Repositories.Interfaces;
+
 namespace GymManagementSystem.PL
 {
     public class Program
@@ -10,6 +14,9 @@ namespace GymManagementSystem.PL
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
+
+            builder.Services.AddDbContext<GymDbContext>();
+            builder.Services.AddScoped<IPlanRepository, PlanRepository>();
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
