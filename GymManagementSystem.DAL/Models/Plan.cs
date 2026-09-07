@@ -5,10 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GymManagementSystem.DAL.Models {
-    public class Plan {
-        public int Id { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime? UpdatedAt { get; set; }
+    public class Plan : BaseEnitity {
         public string Name { get; set; } = default!;
         public string Description { get; set; } = default!;
         public int DurationDays { get; set; }
