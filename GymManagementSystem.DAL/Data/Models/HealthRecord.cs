@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GymManagementSystem.DAL.Models {
+namespace GymManagementSystem.DAL.Data.Models {
     public class HealthRecord : BaseEnitity {
         public int Height { get; set; }
         public int Weight { get; set; }

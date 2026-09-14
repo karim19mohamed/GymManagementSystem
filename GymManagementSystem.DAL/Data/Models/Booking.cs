@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GymManagementSystem.DAL.Models {
+namespace GymManagementSystem.DAL.Data.Models {
     public class Booking : BaseEnitity {
         public bool IsAttended { get; set; } = false;
         public Member Member { get; set; } = default!;

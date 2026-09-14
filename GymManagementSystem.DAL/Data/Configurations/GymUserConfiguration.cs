@@ -1,4 +1,4 @@
-﻿using GymManagementSystem.DAL.Models;
+﻿using GymManagementSystem.DAL.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GymManagementSystem.DAL.Configurations {
+namespace GymManagementSystem.DAL.Data.Configurations {
     public class GymUserConfiguration<T> : IEntityTypeConfiguration<T> where T : GymUser {
         public void Configure(EntityTypeBuilder<T> builder) {
             builder.Property(G => G.Name)
@@ -39,19 +39,20 @@ namespace GymManagementSystem.DAL.Configurations {
                                                           "Phone LIKE '015%'");
             });
 
-            builder.Property(G => G.Address.Street)
-                   .HasColumnName("Street")
-                   .HasColumnType("varchar")
-                   .HasMaxLength(30);
-
-            builder.Property(G => G.Address.City)
-                   .HasColumnName("City")
-                   .HasColumnType("varchar")
-                   .HasMaxLength(30);
-
-            builder.Property(G => G.Address.BuildingNumber)
-                   .HasColumnName("BuildingNumber")
-                   .HasColumnType("varchar");
+            builder.OwnsOne(G => G.Address, address =>
+            {
+                address.Property(a => a.Street)
+                       .HasColumnName("Street")
+                       .HasColumnType("varchar")
+                       .HasMaxLength(30);
+                address.Property(a => a.City)
+                       .HasColumnName("City")
+                       .HasColumnType("varchar")
+                       .HasMaxLength(30);
+                address.Property(a => a.BuildingNumber)
+                       .HasColumnName("BuildingNumber")
+                       .HasColumnType("varchar");
+            });
         }
     }
 }

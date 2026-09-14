@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GymManagementSystem.DAL.Models {
+namespace GymManagementSystem.DAL.Data.Models {
     public class Membership : BaseEnitity {
         public DateTime EndDate { get; set; }
         public Member Member { get; set; } = default!;

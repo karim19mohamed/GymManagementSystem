@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GymManagementSystem.DAL.Models {
+namespace GymManagementSystem.DAL.Data.Models {
     public class Plan : BaseEnitity {
         public string Name { get; set; } = default!;
         public string Description { get; set; } = default!;

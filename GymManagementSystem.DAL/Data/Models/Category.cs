@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GymManagementSystem.DAL.Models {
+namespace GymManagementSystem.DAL.Data.Models {
     public class Category : BaseEnitity {
-        public String CategoryName { get; set; } = default!;
+        public string CategoryName { get; set; } = default!;
         public ICollection<Session> Sessions { get; set; } = default!;
     }
 }

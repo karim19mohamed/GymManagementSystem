@@ -1,4 +1,4 @@
-﻿using GymManagementSystem.DAL.Models;
+﻿using GymManagementSystem.DAL.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GymManagementSystem.DAL.Configurations {
+namespace GymManagementSystem.DAL.Data.Configurations {
     public class SessionConfiguration : IEntityTypeConfiguration<Session> {
         public void Configure(EntityTypeBuilder<Session> builder) {
             builder.ToTable(tb => {

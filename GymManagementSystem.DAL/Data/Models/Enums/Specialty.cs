@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GymManagementSystem.DAL.Models.Enums {
+namespace GymManagementSystem.DAL.Data.Models.Enums {
     public enum Specialty {
         GeneralFitness,
         Yoga,

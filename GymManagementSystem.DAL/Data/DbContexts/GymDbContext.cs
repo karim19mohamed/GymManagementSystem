@@ -4,11 +4,11 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using GymManagementSystem.DAL.Configurations;
-using GymManagementSystem.DAL.Models;
+using GymManagementSystem.DAL.Data.Configurations;
+using GymManagementSystem.DAL.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace GymManagementSystem.DAL.DbContexts {
+namespace GymManagementSystem.DAL.Data.DbContexts {
     public class GymDbContext : DbContext {
         public DbSet<Plan> Plans { get; set; }
         public DbSet<Category> Categories { get; set; }
