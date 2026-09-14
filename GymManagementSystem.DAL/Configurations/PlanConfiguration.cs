@@ -28,7 +28,7 @@ namespace GymManagementSystem.DAL.Configurations {
                    .HasDefaultValueSql("GETDATE()");
 
             builder.ToTable(Tb => {
-                Tb.HasCheckConstraint("PlanDurationCheck", "DurationDays Between 0 And 365");
+                Tb.HasCheckConstraint("PlanDurationCheck", "DurationDays Between 1 And 365");
             });
         }
     }
