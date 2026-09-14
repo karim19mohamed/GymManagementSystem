@@ -7,5 +7,6 @@ using System.Threading.Tasks;
 namespace GymManagementSystem.DAL.Models {
     public class Category : BaseEnitity {
         public String CategoryName { get; set; } = default!;
+        public ICollection<Session> Sessions { get; set; } = default!;
     }
 }

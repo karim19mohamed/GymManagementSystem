@@ -5,12 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GymManagementSystem.DAL.Models {
-    public class HealthRecord : BaseEnitity {
-        public int Height { get; set; }
-        public int Weight { get; set; }
-        public string BloodType { get; set; } = default!;
-        public string? Note { get; set; }
+    public class Membership : BaseEnitity {
+        public DateTime EndDate { get; set; }
         public Member Member { get; set; } = default!;
         public int MemberId { get; set; }
+        public Plan Plan { get; set; } = default!;
+        public int PlanId { get; set; }
     }
 }
