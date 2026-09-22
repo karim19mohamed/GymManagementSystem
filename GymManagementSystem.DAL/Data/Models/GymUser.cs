@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GymManagementSystem.DAL.Data.Models {
-    public class GymUser : BaseEnitity {
+    public abstract class GymUser : BaseEnitity {
         public string Name { get; set; } = default!;
         public string Email { get; set; } = default!;
         public string Phone { get; set; } = default!;
