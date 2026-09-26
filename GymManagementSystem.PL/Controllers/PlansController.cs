@@ -1,17 +1,16 @@
-﻿using GymManagementSystem.DAL.Data.Models;
-using GymManagementSystem.DAL.Repositories.Interfaces;
+﻿using GymManagementSystem.BLL.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace GymManagementSystem.PL.Controllers {
-    public class PlansController(IGenericRepository<Plan> _genericRepository) : Controller {
+    public class PlansController(IPlanService _planService) : Controller {
         public async Task<IActionResult> Index() {
-            var plans = await _genericRepository.GetAllPlansAsync();
+            var plans = await _planService.GetAllPlansAsync();
             return View(plans);
         }
 
         public async Task<IActionResult> Details(int id) {
-            var plan = await _genericRepository.GetByIdAsync(id);
+            var plan = await _planService.GetByIdAsync(id);
             if (plan == null) {
                 return RedirectToAction(nameof(Index));
             }

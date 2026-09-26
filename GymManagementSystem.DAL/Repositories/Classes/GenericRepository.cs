@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace GymManagementSystem.DAL.Repositories.Classes {
     public class GenericRepository<TEntity>(GymDbContext _context) : IGenericRepository<TEntity> where TEntity : BaseEnitity, new() {
         private readonly DbSet<TEntity> _set = _context.Set<TEntity>();
-        public async Task<IEnumerable<TEntity>> GetAllPlansAsync(bool tracking = false, CancellationToken ct = default) {
+        public async Task<IEnumerable<TEntity>> GetAllAsync(bool tracking = false, CancellationToken ct = default) {
             IQueryable<TEntity> query = (tracking) ? _set : _set.AsNoTracking();
             return await query.ToListAsync(ct);
         }

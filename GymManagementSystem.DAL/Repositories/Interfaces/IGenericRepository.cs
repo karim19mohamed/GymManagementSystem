@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GymManagementSystem.DAL.Repositories.Interfaces {
     public interface IGenericRepository<TEntity> where TEntity : BaseEnitity, new() {
-        Task<IEnumerable<TEntity>> GetAllPlansAsync(bool tracking = false, CancellationToken ct = default);
+        Task<IEnumerable<TEntity>> GetAllAsync(bool tracking = false, CancellationToken ct = default);
 
         Task<TEntity?> GetByIdAsync(int id, CancellationToken ct = default);
 
