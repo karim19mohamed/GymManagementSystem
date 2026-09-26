@@ -1,3 +1,5 @@
+using GymManagementSystem.BLL.Services.Classes;
+using GymManagementSystem.BLL.Services.Interfaces;
 using GymManagementSystem.DAL.Data.DbContexts;
 using GymManagementSystem.DAL.Repositories.Classes;
 using GymManagementSystem.DAL.Repositories.Interfaces;
@@ -14,7 +16,9 @@ namespace GymManagementSystem.PL
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddDbContext<GymDbContext>();
+            builder.Services.AddScoped<IPlanService, PlanService>();
             builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            
 
             var app = builder.Build();
 
