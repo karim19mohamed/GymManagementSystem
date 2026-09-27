@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@model PlanViewModel
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -11,9 +13,9 @@
           rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" />
     <!-- ^ Bootstrap 5.3.8 css file -->
-    <link rel="stylesheet" href="./css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <!-- ^ Our main css file -->
-    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="~/css/style.css" />
     <title>Power fitness | Home</title>
 </head>
 
@@ -23,7 +25,7 @@
         <nav class="navbar navbar-expand-lg bg-white my-3">
             <div class="container">
                 <a class="navbar-brand" href="#">
-                    <img src="./images/logo.jpg" alt="" />
+                    <img src="~/images/logo.jpg" alt="" />
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -75,15 +77,14 @@
                 <div class="row justify-content-center">
                     <div class="col-md-6">
                         <div class="card shadow-lg border-0">
-                            @* If Plan is Active put class bg-primary-color if not bg-secondary *@
 
-                            <div class="card-header text-white text-center py-5">
+                            <div class="card-header text-white text-center py-5 @(Model.IsActive ? "bg-primary-color" : "bg-secondary")">
                                 <i class="bi bi-award display-4 mb-3"></i>
-                                <h2 class="mb-0">Basic Plan</h2>
+                                <h2 class="mb-0">@Model.Name</h2>
                             </div>
                             <div class="card-body p-4">
                                 <div class="text-center mb-4 py-3 bg-light rounded">
-                                    <div class="display-3 fw-bold text-primary-color">50</div>
+                                    <div class="display-3 fw-bold text-primary-color">@Model.Price</div>
                                     <small class="text-muted fs-5">EGP</small>
                                 </div>
 
@@ -95,7 +96,7 @@
                                             </div>
                                             <div>
                                                 <h6 class="mb-0 text-muted">Duration</h6>
-                                                <p class="mb-0 fw-bold">30 days</p>
+                                                <p class="mb-0 fw-bold">@Model.DurationDays days</p>
                                             </div>
                                         </div>
                                     </div>
@@ -107,7 +108,7 @@
                                             </div>
                                             <div class="flex-grow-1">
                                                 <h6 class="mb-2 text-muted">Description</h6>
-                                                <p class="mb-0">This is a basic fitness plan designed for beginners.</p>
+                                                <p class="mb-0">@Model.Description</p>
                                             </div>
                                         </div>
                                     </div>
@@ -115,21 +116,24 @@
                                     <div class="detail-item mb-4">
                                         <div class="d-flex align-items-center mb-2">
                                             <div class="icon-box me-3">
-                                                @* If Plan is Active put class bi-check-circle-fill text-success if not bi-x-circle-fill text-danger *@
-                                                <i class="bi fs-4"></i>
+                                                <i class="bi fs-4 @(Model.IsActive ? "bi-check-circle-fill text-success" : "bi-x-circle-fill text-danger")"></i>
                                             </div>
                                             <div>
                                                 <h6 class="mb-0 text-muted">Status</h6>
                                                 <p class="mb-0">
-                                                    @* If Plan is Active *@
-                                                    <span class="badge bg-success">
-                                                        Active
-                                                    </span>
-                                                    @* If Plan is Inactive *@
-                                                    @* If Plan is Inactive *@
-                                                    <span class="badge bg-danger">
-                                                        Inactive
-                                                    </span>
+                                                    @if (Model.IsActive)
+                                                    {
+                                                        <span class="badge bg-success">
+                                                            Active
+                                                        </span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="badge bg-danger">
+                                                            Inactive
+                                                        </span>
+                                                    }
+                                                    
                                                 </p>
                                             </div>
                                         </div>
