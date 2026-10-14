@@ -10,6 +10,34 @@ using System.Threading.Tasks;
 
 namespace GymManagementSystem.BLL.Services.Classes {
     public class MemberService(IGenericRepository<Member> _genericRepository) : IMemberService {
+        public async Task<bool> CreateMemberAsync(CreateMemberViewModel member, CancellationToken ct = default) {
+            var memberExists = await _genericRepository.AnyAsync(m => member.Email == m.Email || member.Phone == m.Phone, ct: ct);
+            if (memberExists) {
+                return false;
+            }
+            var result = await _genericRepository.AddAsync(
+                new Member {
+                    Name = member.Name,
+                    Email = member.Email,
+                    Phone = member.Phone,
+                    DateOfBirth = member.DateOfBirth,
+                    Gender = member.Gender,
+                    Address = new Address {
+                        Street = member.Street,
+                        City = member.City,
+                        BuildingNumber = member.BuildingNumber
+                    },
+                    HealthRecord = new HealthRecord {
+                        Height = member.HealthRecordViewModel.Height,
+                        Weight = member.HealthRecordViewModel.Weight,
+                        BloodType = member.HealthRecordViewModel.BloodType,
+                        Note = member.HealthRecordViewModel.Note
+                    }
+                }
+                , ct: ct);
+            return result > 0;
+        }
+
         public async Task<IEnumerable<MemberViewModel>> GetAllMembersAsync(CancellationToken ct = default) {
             var members = await _genericRepository.GetAllAsync(ct: ct);
             return members.Select(m => new MemberViewModel {
