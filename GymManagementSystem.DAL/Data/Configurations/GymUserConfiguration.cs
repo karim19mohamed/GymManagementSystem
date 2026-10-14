@@ -51,7 +51,7 @@ namespace GymManagementSystem.DAL.Data.Configurations {
                        .HasMaxLength(30);
                 address.Property(a => a.BuildingNumber)
                        .HasColumnName("BuildingNumber")
-                       .HasColumnType("varchar");
+                       .HasColumnType("int");
             });
         }
     }
