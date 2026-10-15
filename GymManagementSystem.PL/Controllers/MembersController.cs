@@ -18,6 +18,10 @@ namespace GymManagementSystem.PL.Controllers {
         public async Task<IActionResult> Create(CreateMemberViewModel member, CancellationToken ct) {
             if (!ModelState.IsValid) return View(member);
             var result = await _memberService.CreateMemberAsync(member, ct:ct);
+            if (result)
+                TempData["Success"] = "Member Creation is Succeeded";
+            else
+                TempData["Failure"] = "Member Creation is failed";
             return RedirectToAction(nameof(Index));
         }
     }
