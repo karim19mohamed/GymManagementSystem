@@ -24,5 +24,14 @@ namespace GymManagementSystem.PL.Controllers {
                 TempData["Failure"] = "Member Creation is failed";
             return RedirectToAction(nameof(Index));
         }
+
+        public async Task<IActionResult> MemberDetails(int id, CancellationToken ct) {
+            var memberDetails = await _memberService.GetMemberDetailsAsync(id, ct:ct);
+            if (memberDetails == null) {
+                TempData["ErrorMessage"] = "Member Not Found";
+                RedirectToAction(nameof(Index));
+            }
+            return View(memberDetails);
+        }
     }
 }

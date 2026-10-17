@@ -36,5 +36,9 @@ namespace GymManagementSystem.DAL.Repositories.Classes {
         public Task<bool> AnyAsync(Expression<Func<TEntity, bool>> predicate, bool tracking = false, CancellationToken ct = default) {
             return (tracking) ? _set.AnyAsync(predicate, ct) : _set.AsNoTracking().AnyAsync(predicate, ct);
         }
+
+        public Task<TEntity?> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate, bool tracking = false, CancellationToken ct = default) {
+            return (tracking) ? _set.FirstOrDefaultAsync(predicate, ct) : _set.AsNoTracking().FirstOrDefaultAsync(predicate, ct);
+        }
     }
 }
