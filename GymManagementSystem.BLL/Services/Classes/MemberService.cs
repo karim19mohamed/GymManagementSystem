@@ -11,7 +11,8 @@ using System.Threading.Tasks;
 namespace GymManagementSystem.BLL.Services.Classes {
     public class MemberService(IGenericRepository<Member> _memberRepository, 
                                IGenericRepository<Membership> _membershipRepository,
-                               IGenericRepository<Plan> _planRepository) : IMemberService {
+                               IGenericRepository<Plan> _planRepository,
+                               IGenericRepository<HealthRecord> _healthRecordRepository) : IMemberService {
         public async Task<bool> CreateMemberAsync(CreateMemberViewModel member, CancellationToken ct = default) {
             var memberExists = await _memberRepository.AnyAsync(m => member.Email == m.Email || member.Phone == m.Phone, ct: ct);
             if (memberExists) {
@@ -75,6 +76,19 @@ namespace GymManagementSystem.BLL.Services.Classes {
             }
 
             return memberDetails;
+        }
+
+        public async Task<HealthRecordViewModel?> GetHealthRecordAsync(int id, CancellationToken ct = default) {
+            var healthRecordDetails = await _healthRecordRepository.FirstOrDefaultAsync(h => h.MemberId == id, ct: ct);
+            if (healthRecordDetails == null)
+                return null;
+            var healthRecord = new HealthRecordViewModel {
+                Height = healthRecordDetails.Height,
+                Weight = healthRecordDetails.Weight,
+                BloodType = healthRecordDetails.BloodType,
+                Note = healthRecordDetails.Note,
+            };
+            return healthRecord;
         }
     }
 }

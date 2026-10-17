@@ -33,5 +33,14 @@ namespace GymManagementSystem.PL.Controllers {
             }
             return View(memberDetails);
         }
+
+        public async Task<IActionResult> HealthRecordDetails(int id, CancellationToken ct) {
+            var healthRecordDetails = await _memberService.GetHealthRecordAsync(id, ct:ct);
+            if (healthRecordDetails == null) {
+                TempData["ErrorMessage"] = "Health Record Not Found";
+                RedirectToAction(nameof(Index));
+            }
+            return View(healthRecordDetails);
+        }
     }
 }
