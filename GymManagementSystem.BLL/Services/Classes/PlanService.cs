@@ -9,9 +9,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GymManagementSystem.BLL.Services.Classes {
-    public class PlanService(IGenericRepository<Plan> _genericRepository) : IPlanService {
+    public class PlanService(IUnitOfWork _unitOfWork) : IPlanService {
         public async Task<IEnumerable<PlanViewModel>> GetAllPlansAsync(CancellationToken ct = default) {
-            var plans = await _genericRepository.GetAllAsync(ct: ct);
+            var plans = await _unitOfWork.GetRepository<Plan>().GetAllAsync(ct: ct);
             return plans.Select(p => new PlanViewModel {
                 Id = p.Id,
                 Name = p.Name,
@@ -23,7 +23,7 @@ namespace GymManagementSystem.BLL.Services.Classes {
         }
 
         public async Task<PlanViewModel?> GetByIdAsync(int id, CancellationToken ct = default) {
-            var plan = await _genericRepository.GetByIdAsync(id, ct: ct);
+            var plan = await _unitOfWork.GetRepository<Plan>().GetByIdAsync(id, ct: ct);
             if (plan == null) {
                 return null;
             }

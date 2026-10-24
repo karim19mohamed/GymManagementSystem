@@ -16,6 +16,7 @@ namespace GymManagementSystem.PL
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddDbContext<GymDbContext>();
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<IPlanService, PlanService>();
             builder.Services.AddScoped<IMemberService, MemberService>();
             builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));

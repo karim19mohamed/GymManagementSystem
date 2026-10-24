@@ -19,19 +19,9 @@ namespace GymManagementSystem.DAL.Repositories.Classes {
         public async Task<TEntity?> GetByIdAsync(int id, CancellationToken ct = default) {
             return await _set.FindAsync(id, ct);
         }
-        public async Task<int> AddAsync(TEntity entity, CancellationToken ct = default) {
-            _set.Add(entity);
-            return await _context.SaveChangesAsync(ct);
-        }
-
-        public async Task<int> DeleteAsync(TEntity entity, CancellationToken ct = default) {
-            _set.Remove(entity);
-            return await _context.SaveChangesAsync(ct);
-        }
-        public async Task<int> UpdateAsync(TEntity entity, CancellationToken ct = default) {
-            _set.Update(entity);
-            return await _context.SaveChangesAsync(ct);
-        }
+        public void Add(TEntity entity, CancellationToken ct = default) => _set.Add(entity);
+        public void Delete(TEntity entity, CancellationToken ct = default) => _set.Remove(entity);
+        public void Update(TEntity entity, CancellationToken ct = default) => _set.Update(entity);
 
         public Task<bool> AnyAsync(Expression<Func<TEntity, bool>> predicate, bool tracking = false, CancellationToken ct = default) {
             return (tracking) ? _set.AnyAsync(predicate, ct) : _set.AsNoTracking().AnyAsync(predicate, ct);
