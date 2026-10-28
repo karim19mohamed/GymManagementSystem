@@ -8,8 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GymManagementSystem.DAL.Repositories.Classes {
-    public class UnitOfWork(GymDbContext _context) : IUnitOfWork {
+    public class UnitOfWork(GymDbContext _context, ISessionRepository SessionRepository) : IUnitOfWork {
         private readonly Dictionary<string, object> _repositories = [];
+
+        public ISessionRepository _sessionRepository => SessionRepository;
+
         public IGenericRepository<TEntity> GetRepository<TEntity>() where TEntity : BaseEnitity, new() {
             var name = typeof(TEntity).Name;
             if (_repositories.TryGetValue(name, out object? repo))

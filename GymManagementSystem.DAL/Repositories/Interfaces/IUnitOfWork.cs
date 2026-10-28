@@ -10,5 +10,6 @@ namespace GymManagementSystem.DAL.Repositories.Interfaces {
         Task<int> SaveChangesAsync(CancellationToken ct = default);
 
         IGenericRepository<TEntity> GetRepository<TEntity>() where TEntity : BaseEnitity, new();
-    }
+        ISessionRepository _sessionRepository { get; }
+        }
 }
