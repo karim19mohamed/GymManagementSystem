@@ -1,4 +1,5 @@
-﻿using GymManagementSystem.BLL.Services.Interfaces;
+﻿using AutoMapper;
+using GymManagementSystem.BLL.Services.Interfaces;
 using GymManagementSystem.BLL.ViewModels.PlanViewModels;
 using GymManagementSystem.DAL.Data.Models;
 using GymManagementSystem.DAL.Repositories.Interfaces;
@@ -9,17 +10,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GymManagementSystem.BLL.Services.Classes {
-    public class PlanService(IUnitOfWork _unitOfWork) : IPlanService {
+    public class PlanService(IUnitOfWork _unitOfWork, IMapper _mapper) : IPlanService {
         public async Task<IEnumerable<PlanViewModel>> GetAllPlansAsync(CancellationToken ct = default) {
             var plans = await _unitOfWork.GetRepository<Plan>().GetAllAsync(ct: ct);
-            return plans.Select(p => new PlanViewModel {
-                Id = p.Id,
-                Name = p.Name,
-                Description = p.Description,
-                DurationDays = p.DurationDays,
-                Price = p.Price,
-                IsActive = p.IsActive
-            });
+            return _mapper.Map<IEnumerable<PlanViewModel>>(plans);
         }
 
         public async Task<PlanViewModel?> GetByIdAsync(int id, CancellationToken ct = default) {
@@ -27,14 +21,7 @@ namespace GymManagementSystem.BLL.Services.Classes {
             if (plan == null) {
                 return null;
             }
-            return new PlanViewModel {
-                Id = plan.Id,
-                Name = plan.Name,
-                Description = plan.Description,
-                DurationDays = plan.DurationDays,
-                Price = plan.Price,
-                IsActive = plan.IsActive
-            };
+            return _mapper.Map<PlanViewModel>(plan);
         }
     }
 }
